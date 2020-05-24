@@ -1,0 +1,44 @@
+<view class="container b-f">
+
+  <!-- 头部背景图 -->
+  <view class="dealer-bg">
+    <image mode="widthFix" src="{{ background }}"></image>
+  </view>
+
+  <view class="widget-body b-f dis-flex flex-dir-column flex-y-center">
+    <form bindsubmit="formSubmit" report-submit="true">
+      <!-- 用户积分 -->
+      <view class="widget widget__capital m-top20 b-f dis-flex flex-dir-column">
+        <view class="capital__item dis-flex flex-x-between flex-y-center">
+          <view class="item__left">可兑换积分：</view>
+          <view class="item__right c-violet">
+            <text class="f-24"></text>
+            <text class="f-34">{{ user.points }}</text>
+          </view>
+        </view>
+        <view class="capital__item dis-flex flex-x-between flex-y-center">
+          <view class="item__left">消耗积分：</view>
+          <view class="item__right c-violet">
+            <text class="f-24"></text>
+            <text class="f-34">-{{ consume }}</text>
+          </view>
+        </view>
+        <view class="capital__item dis-flex flex-y-center">
+          <view class="item__left">兑换余额：</view>
+          <view class="item__right flex-box">
+            <input name="balance" type="digit" placeholder="请输入要兑换的余额" value="" bindinput="setPoints"></input>
+          </view>
+        </view>
+      </view>
+      <!-- 兑换规则 -->
+      <view class="capital__lowest m-top20 f-24 col-7 t-r">
+        1积分可兑换{{ setting.exchange_ratio }}余额
+      </view>
+
+      <!-- 提交申请 -->
+      <view class="form-submit dis-flex flex-x-center">
+        <button formType="submit" disabled="{{ disabled }}">确认兑换</button>
+      </view>
+    </form>
+  </view>
+</view>

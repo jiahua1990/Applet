@@ -1,0 +1,70 @@
+<view class="head" style="background:#fff">
+    <view class="date-display flex">
+        <view class="next-prev">
+            <view bindtap="changeMonth" class="arrow prev" id="prev"></view>
+        </view>
+        <view class="selected-date">{{currYear}}年{{currMonth}}月</view>
+        <view class="next-prev">
+            <view bindtap="changeMonth" class="arrow next" id="next"></view>
+        </view>
+    </view>
+</view>
+<view class="container-rl">
+    <!-- 连续签到 -->
+    <view class="lxqd">连续签到<text>{{lxts}}</text>天了</view>
+
+    <!-- 星期 -->
+    <view class="week-display qdflex">
+        <view class="week-cell {{item.class}}" wx:for="{{week}}" wx:key="*this">{{item.value}}</view>
+    </view>
+
+    <view class="date-picker">
+        <view class="qdflex">
+            <view class="date-cell" wx:for="{{emptyGrids}}" wx:key="*this"></view>
+            <view class="date-cell" data-selected="{{[currYear,currMonth,item.value]}}" wx:for="{{days}}" wx:key="*this">
+                <!-- 是否签到 -->
+                <view data-selected="{{[currYear,currMonth,item.value]}}" wx:if="{{item.isqd!=null}}">
+                    <icon size="27" type="success"></icon>
+                </view>
+                <!-- 非特殊日期 -->
+                <view class="{{item.class}}{{selected==item.value?'selected':''}} {{xz==item.value?'xz':''}}" 
+                      data-selected="{{[currYear,currMonth,item.value]}}" 
+                      data-tsrq="{{days[index]}}" 
+                      wx:if="{{item.isqd==null&&item.tsrq==null}}">
+                    {{item.value}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 每日签到 -->
+    <view class="xxts">日常签到<text>+{{qdset.basic_sign_point}}</text>积分</view>
+    <view class="weui-btn-area">
+        <button bindtap="qd" class="weui-btn" disabled="{{disabled}}" style="background:{{disabled?'#d5d5d5':color}};" type="primary">
+          {{logintext}}
+        </button>
+    </view>
+</view>
+
+<navigator url="pm">
+    <view class="ckpm"></view>
+</navigator>
+
+<view style="background:#fff;">
+    <view class="jfgz1">
+        <view>首次签到</view>
+    </view>
+    <view class="jfgz2">
+        <view class="jlgz">
+            <text>首次签到可额外获得{{qdset.first_sign_point}}积分</text>
+        </view>
+    </view>
+    <view class="jfgz1">
+        <view>奖励规则</view>
+    </view>
+    <view class="jfgz2 second-div">
+        <view class="jlgz ">
+            <text wx:for="{{jl}}" wx:key="*this">连续签到{{index}}天赠送{{item}}积分</text>
+        </view>
+    </view>
+</view>
